@@ -4,39 +4,83 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>「これでいい」と言える食卓｜アーカイブ</title>
+<meta name="color-scheme" content="light">
+<title>「これでいい」と言える食卓｜動画視聴ページ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Old+Mincho:wght@500;700&display=swap" rel="stylesheet">
 <style>
-  :root { --bg:#FFF6EA; --ink:#3a2f26; --accent:#E8833A; --card:#ffffff; --line:#F0D9BF; }
-  @media (prefers-color-scheme: dark) { :root { --bg:#2a221b; --ink:#f3e9dc; --card:#382d24; --line:#5a4838; } }
-  * { box-sizing: border-box; }
-  body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,'Hiragino Sans','Noto Sans JP',sans-serif; line-height:1.8; }
-  main { max-width:640px; margin:0 auto; padding:32px 16px 64px; }
-  h1 { font-size:1.25rem; color:var(--accent); margin:0 0 .6em; }
-  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:20px; }
-  label { display:block; margin-bottom:8px; }
-  input[type=password], input[type=text] { width:100%; font-size:16px; padding:12px; border:1px solid var(--line); border-radius:8px; background:var(--bg); color:var(--ink); }
-  button { margin-top:12px; font-size:16px; padding:12px 20px; border:0; border-radius:8px; background:var(--accent); color:#fff; cursor:pointer; }
-  #msg { color:#c0392b; min-height:1.6em; margin-top:8px; }
-  #content a { color:var(--accent); }
-  #content .video { margin:16px 0; }
-  #content iframe { width:100%; aspect-ratio:16/9; border:0; border-radius:8px; }
+  :root {
+    --bg:#f9f7ef; --brown:#553727; --sub:#85634b; --blue:#0085c9; --lblue:#7abbe2; --pale:#eaf4fb;
+    --orange:#f26b3b; --line:#8a6850;
+  }
+  * { box-sizing:border-box; }
+  html { color-scheme:light; }
+  body { margin:0; background:var(--bg); color:var(--brown); font-family:'Noto Sans JP','Hiragino Sans',sans-serif; line-height:1.9; -webkit-text-size-adjust:100%; }
+  .bar { position:fixed; left:0; top:0; bottom:0; width:10px; background:var(--blue); z-index:3; }
+  .mark { position:fixed; right:-8vw; bottom:-4vw; width:min(62vw,560px); aspect-ratio:830/580; background:url(assets/mark.png) right bottom/contain no-repeat; opacity:.9; z-index:0; pointer-events:none; }
+  main { position:relative; z-index:1; max-width:680px; margin:0 auto; padding:44px 20px 56px 30px; }
+  .eyebrow { margin:0 0 10px; font-size:.95rem; color:var(--sub); letter-spacing:.08em; }
+  h1 { margin:0; font-family:'Zen Old Mincho','Noto Serif JP',serif; font-weight:700; font-size:clamp(1.65rem,6.6vw,2.4rem); line-height:1.5; color:var(--brown); letter-spacing:.04em; }
+  .sub { margin:14px 0 0; display:inline-flex; align-items:center; gap:10px; background:var(--blue); color:#fff; font-weight:700; font-size:1.05rem; padding:7px 20px; border-radius:999px; letter-spacing:.06em; }
+  .sub .play { font-size:.8rem; }
+  .lead { margin:0 0 18px; font-size:1rem; }
+  .rule { width:min(260px,56%); height:3px; background:var(--line); margin:22px 0 28px; border-radius:2px; }
+  .card { background:#fff; border:3px solid var(--lblue); border-radius:24px; padding:22px 20px; }
+  label { display:block; margin-bottom:10px; font-weight:500; }
+  input[type=password] { width:100%; font-size:16px; padding:14px 16px; border:2px solid var(--lblue); border-radius:14px; background:var(--bg); color:var(--brown); font-family:inherit; }
+  input[type=password]:focus { outline:3px solid #cfe7f6; border-color:var(--blue); }
+  button { margin-top:14px; width:100%; font-size:17px; font-weight:700; padding:14px 20px; border:0; border-radius:999px; background:var(--orange); color:#fff; cursor:pointer; font-family:inherit; letter-spacing:.06em; }
+  button:active { transform:translateY(1px); }
+  #msg { color:#b3402a; min-height:1.7em; margin-top:10px; font-size:.95rem; }
+
+  /* 開いたあと */
+  .session { background:#fff; border:3px solid var(--lblue); border-radius:24px; padding:20px 16px 18px; }
+  .s-head { display:flex; gap:14px; align-items:center; margin-bottom:16px; }
+  .num { flex:none; width:46px; height:46px; border-radius:50%; background:var(--orange); color:#fff; font-weight:700; font-size:1.5rem; display:flex; align-items:center; justify-content:center; line-height:1; }
+  .s-label { margin:0; font-size:.88rem; color:var(--sub); line-height:1.5; }
+  .s-title { margin:2px 0 0; font-family:'Zen Old Mincho',serif; font-weight:700; font-size:clamp(1.15rem,4.6vw,1.45rem); line-height:1.5; color:var(--brown); }
+  .video { border-radius:16px; overflow:hidden; background:#000; border:3px solid var(--lblue); }
+  .video iframe { display:block; width:100%; aspect-ratio:16/9; border:0; }
+  .meta { margin:12px 2px 0; font-size:.88rem; color:var(--sub); }
+  .note { margin:22px 0; background:var(--pale); border:3px solid var(--lblue); border-radius:20px; padding:16px 18px; font-size:.95rem; line-height:1.85; }
+  .sheet { display:block; text-align:center; text-decoration:none; background:var(--orange); color:#fff; font-weight:700; font-size:1.02rem; padding:16px 18px; border-radius:999px; letter-spacing:.04em; line-height:1.5; }
+  .sheet small { display:block; font-weight:500; font-size:.8rem; opacity:.95; letter-spacing:.02em; }
+  .after, .note, .lead, .s-title, .meta { text-wrap:balance; }
+  .after-box { margin-top:18px; padding-top:18px; border-top:2px dashed var(--lblue); }
+  .after { margin:0 0 12px; text-align:center; font-size:.95rem; }
+
+  footer { margin-top:46px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+  footer img { width:150px; height:auto; display:block; }
+  footer p { margin:0; font-size:.7rem; color:var(--sub); line-height:1.6; }
+  @media (min-width:700px) { main { padding:64px 24px 72px; } .card, .session { padding:28px 28px 24px; border-width:4px; border-radius:30px; } .video { border-width:4px; } .bar { width:16px; } }
 </style>
 </head>
 <body>
+<div class="bar"></div>
+<div class="mark" aria-hidden="true"></div>
 <main>
-  <h1>「これでいい」と言える食卓｜アーカイブ</h1>
+  <p class="eyebrow">IOBスクール｜第0期</p>
+  <h1>「これでいい」と言える食卓</h1>
+  <p class="sub">授業の動画視聴ページ</p>
+  <div class="rule"></div>
+  <p class="lead" id="lead">パスワードを入力して、録画をご覧ください。</p>
   <div class="card" id="gate">
     <form id="f">
-      <label for="pw">メールでお伝えしたパスワードを入れてください</label>
+      <label for="pw">パスワード</label>
       <input id="pw" type="password" autocomplete="current-password" autofocus>
-      <button type="submit">見る</button>
+      <button type="submit">録画ページを開く</button>
       <div id="msg" role="alert"></div>
     </form>
   </div>
   <div id="content" hidden></div>
+  <footer>
+    <img src="assets/logo.png" alt="Institut für Organic Business">
+    <p>Copyright ©2026 Institut für Organic Business GmbH.<br>All Rights Reserved.</p>
+  </footer>
 </main>
 <script>
-const SALT='q1NszicV6aPaHYvKL84aXw==', IV='0ysQjXhk/c0eXJ1S', ITER=250000, DATA='AU2yUx5RWy/o6RwkwT9xvoMqMx+4HyIZqbtQfnOje+EQt4zL10qdIMkUbVq1KTzmKvATjfSyiS8mKDAdW2GsWxdYCEOE0SpHsywVjviYSFuZw+7u07qEoWlze0Lju6Vss9Y29hekaRPQjFuIc18qXZfd7ushM4jJoARmmq9YG74rmfjii1rkF2QJsZBUKy8O0koq8oeZyBuDuUDgUT6AyfF7BQxdhf7WbKJEP0bJaLKEYZEurYvxquRabrc/aNikbWdbWTnc3mVtZhdW387l9sRoezTAh+d1UNmfzRbew6fsTQjkATKMqtiyNPMb8iEEebLeIiRsL2uW/LTqZG88lekp9F9OclvlYP5N2h0baax+lSxVnGC3/gxIXoHNZFdXI40DDeAvG8Y9zGfSMlfrSnS3QXXxXdfEqJDsFzQAB8erbC+1e1rQYhH/VG79tUx7YwwWwY6bMTl6RZr/7bkMUxTDyRstbNnyZcVnmm4b9CUtuazEBayGom2+ufgxV2OWRlAbna9QpLU6OisWWRfx0+J0N5+3DfSUxy0JysuFoKMhEfHDMBJPGD/URnkBV9+LB52deu8WPIBtbb/TTLAIc0LZJzcQTTzgts1tKAmHZK+bcf/vIxuSOujYfsUqYD8cYEjua1XdXW5XYkEMbF4n/S961ruAJKC3ngQi0kBkOKCuIkOdnD+DDwUCxi9BApu0sbXdjNspLrZQVvGBZNJYxcpBwkoUjR2QdIbBJYcku0gSg3NTxzHzTTosS2dToE8o56M5VbEFxP6yHoFGLJ5S0Pqus2eEEXjQQhElTKTTnPo78JYPcHzSi44wqVVo/tww/DzpMb02BRuj5KOp+rS6MDYhNMm6APx+egnAZ2/kmmJc/nKsO47WDSGbp7M1cAnY33O5PtQtwi/T5dxUqcKKhDbFl2qdTiNWq4kP0YWbNPX+FJuMYtOouHx29KbXMcLhiJzMxAXN5K+2wcnBI5rjv8o6zFSdWNmECm5KEdfXvGEDbuDP4SMkXumiYikZMQGupJkObs31BEihkui9XCNaf5GlC+ifED9aIExm3OxyD7So1W6V1taDvCBxt8RwrsOr7Cr/SKwc4xovmkBhX0iqV9et0IOk66FhDp84YHxriJl8OOWTx56s8ZM=';
+const SALT='S9tUg91dEe6sVppTwDJpfA==', IV='NMgXWIj2Oxi+6TNc', ITER=250000, DATA='VDZPtJO1FQFyVisf9/oKU9Yd1wtJW6LGdvYDjaIUQH9NdChUSH98A8gh8ViEBC1utaSKjdK77xVmOCMRtGvjrBWa95z3iefgVwCk1Cj2vscZ0L0oKCcTysX793o2mWCcjTUuoL+9IfS3vmNuUIsEagW0mZRnsRVzu7y83TmbXk7WznCxaxM38C84ebN3Z70lXUEcHJRmeKH+ksYA8ANYzdAdHHkJ+4q862Hs6JkPpGAm4UYgUxuaRTJ7akIeQktCS25dkyytNCcgzxLQCIB7eP/Gh7ZDHLeWzLBfCyeaRkuJH4d4ej5V0/pubdb2drbUruV2oNEic6WH4uIATPI2UD7i7ut57PQk7AGJjvhPtPNmlFEFV/ic4oGaRUGgp0x48CovesV8euSB0muH6Ymjz3wzjGHJzkjcAOjsVlu3o7USHx/pB5jy7LsreF7fhqT1bfmd1oiNb7zDwvIFIHjwYNjpJhDmDsXCFkXqH5GPCZWVmX5Vw42htGPrUJ/KgO9FvuApHMNq3nmFZVTnISFDqe3qzhIkaS+k4dji7OoYA4G5CIEzWJOTOh1GJ6d+QvhzRZJlZuIhdSa/o3Y41ATsxO7PjnBR9mMx2BBs96SFvY5N8tDcFwV3JBGJBiJcZhz58gZ+haJ6hjaxiR79ISU/neIF0YU7zT/n/+nXXTEjXMKYGmNeMQzR10qK6Mq7tNBGE0VriRIyE5tgVeM7nVD9bFWlerrIBRL2i1fwncukH/zFzBDyGd6I7KVWfwaUrGzE+rMnVjiX1FFJKWGl1LCApeq/ohjmwHMFFGh2RbP8/bh1PCCdBRww7FSFhgP/2aHMoYqVCjals4DIZDJ4mBg2x3NLltZxLf6rQe9FBrdl92bC712YkTi8sEPBh3cCEHorWalwmuTJ0qaQ25KCJpLrrsuc7HyyuavS9dwtgXxCD2Y2sUMHoE6U5okt/8PYjKqhJEqh0IcPOrzfjnGojItcRw9iImUNzEI88pWidS5VFdYBjAIUNBsA/ixCIMf/35Wn8jI/3o6dOILInp9lkTClOhBoYX7AGp/UPOvwgqzV+nz1Jk2cFlmY/9TGEDMgmj1UDnl8AySs3LO/jK5G2gfTdDIzoizVqztiEx6tca/hJ8cElGF0SsetV8UZn2N4u+KlbgQnC4WNJ+buVGVS7dwiO+9NLig3uRItdK3K+YYJcFcfUqEYrL6SlPMy0hOpEIEStq9NV/wvecn/2kTxLQYD5q2kBOkkt/vITwbLG9uyOqD5lZB+2l9DtNJ4BBZuZ8tekyhaAibO5u9fjWSDn0RsIajUw0pIr/BJZs9tTIQ0gn5fypJsL8nEvfFTYrMsO3Io8fCfLnM/FSsy1w8si6yoxX/rv1N8HnxZXOswdUZXYgHOb55i1mY2swPMOyyPB8a5HBYea8dmwl1QOwJuZDqb1T8ZiJslsxiaU3ZGwXG/AomqeyjecENAkjQXiwMDZb3mW0iYDVvO0elQSgOysOc4Uw1RG3Or7wdOo20IGrOnpqi7hJ8fwWAFtmBC8hYIj7fJHQfkwFgJPSNwV8NkfjbL4zU7HVk9dpKaADyk5GR8okAfAvR5MPkZ+0fZItUrZ3SzZpB2Jj5Y+gpmENXK+TNCjoQLxt4cZHZ64R4=';
 const u8 = (b)=>Uint8Array.from(atob(b), ch=>ch.charCodeAt(0));
 async function open(pw){
   const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(pw), 'PBKDF2', false, ['deriveKey']);
@@ -50,8 +94,8 @@ document.getElementById('f').addEventListener('submit', async (e)=>{
   try {
     const html = await open(document.getElementById('pw').value);
     const c = document.getElementById('content'); c.innerHTML = html; c.hidden = false;
-    document.getElementById('gate').hidden = true;
-  } catch (err) { msg.textContent = 'パスワードが違うようです。もう一度お試しください。'; }
+    document.getElementById('gate').hidden = true; document.getElementById('lead').hidden = true;
+  } catch (err) { msg.textContent = 'パスワードが違います。もう一度入力してください。'; }
 });
 </script>
 </body>
